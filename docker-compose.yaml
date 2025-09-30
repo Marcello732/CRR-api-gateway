@@ -3,6 +3,14 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: api-gateway
+    container_name: CRR-api-gateway
     ports:
       - "8080:8080"
+    networks:
+      - CRR_network
+
+
+networks:
+  CRR_network:
+    driver: bridge
+    name: CRR_network
