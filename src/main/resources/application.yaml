@@ -2,13 +2,12 @@ server:
   port: 8080
 
 paths:
-  career-service: http://localhost:8081
-  career-ai-service: http://localhost:8082
+  career-service: http://career-service:8081
+  career-ai-service: http://career-ai-service:8082
 
 spring:
   application:
     name: CRR-api-gateway
-
   cloud:
     gateway:
       server:
@@ -17,18 +16,36 @@ spring:
             - id: career-service
               uri: ${paths.career-service}
               predicates:
-                - Path=/api/v1/pdf/**, /api/v1/scrapper/**
+                - Path=/api/v1/pdf/**, /api/v1/scrapper/**, /api/openapi.yaml
 
             - id: career-ai-service
               uri: ${paths.career-ai-service}
               predicates:
-                - Path=/api/v1/cv/**, /api/v1/offer/**
+                - Path=/api/v1/offer/**, /api/v1/cv/**, /openapi.json
+
+          globalcors:
+            cors-configurations:
+              "[/**]":
+                allowedOrigins:
+                  - "http://localhost:8080"
+                  - "http://career-service:8081"
+                  - "http://career-ai-service:8082"
+                  - "http://127.0.0.1:8080"
+                allowedMethods:
+                  - GET
+                  - POST
+                  - PUT
+                  - DELETE
+                  - OPTIONS
+                allowedHeaders: "*"
+                allowCredentials: true
 
 springdoc:
   swagger-ui:
     enabled: true
     urls:
       - name: "Career Service"
-        url: "${paths.career-service}/api/openapi.yaml"
+        url: "/api/openapi.yaml"
+
       - name: "Career AI Service"
-        url: "${paths.career-ai-service}/openapi.json"
+        url: "/openapi.json"
