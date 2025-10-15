@@ -16,7 +16,7 @@ spring:
             - id: career-service
               uri: ${paths.career-service}
               predicates:
-                - Path=/api/v1/pdf/**, /api/v1/scrapper/**, /api/openapi.yaml
+                - Path=/api/v1/pdf/**, /api/v1/scrapper/**, /api/v1/career-service/v3/api-docs
 
             - id: career-ai-service
               uri: ${paths.career-ai-service}
@@ -45,7 +45,7 @@ springdoc:
     enabled: true
     urls:
       - name: "Career Service"
-        url: "/api/openapi.yaml"
+        url: "/api/v1/career-service/v3/api-docs"
 
       - name: "Career AI Service"
         url: "/openapi.json"
