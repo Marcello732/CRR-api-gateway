@@ -16,7 +16,7 @@ spring:
             - id: career-service
               uri: ${paths.career-service}
               predicates:
-                - Path=/api/v1/pdf/**, /api/v1/scrapper/**, /api/openapi.yaml
+                - Path=/api/v1/pdf/**, /api/v1/scrapper/**, /api/v1/career-service/v3/api-docs
 
             - id: career-ai-service
               uri: ${paths.career-ai-service}
@@ -30,7 +30,7 @@ spring:
                   - "http://localhost:8080"
                   - "http://career-service:8081"
                   - "http://career-ai-service:8082"
-                  - "http://127.0.0.1:8080"
+                  - "http://localhost:5173"
                 allowedMethods:
                   - GET
                   - POST
@@ -45,7 +45,7 @@ springdoc:
     enabled: true
     urls:
       - name: "Career Service"
-        url: "/api/openapi.yaml"
+        url: "/api/v1/career-service/v3/api-docs"
 
       - name: "Career AI Service"
         url: "/openapi.json"
