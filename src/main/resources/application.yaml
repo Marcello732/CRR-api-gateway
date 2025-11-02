@@ -16,7 +16,7 @@ spring:
             - id: career-service
               uri: ${paths.career-service}
               predicates:
-                - Path=/api/v1/pdf/**, /api/v1/cv/**, /api/v1/scrapper/**, /api/v1/career-service/v3/api-docs
+                - Path=/api/v1/pdf/**, /api/v1/cv/prepare/**, /api/v1/scrapper/**, /api/v1/career-service/v3/api-docs
 
             - id: career-ai-service
               uri: ${paths.career-ai-service}
@@ -39,6 +39,8 @@ spring:
                   - OPTIONS
                 allowedHeaders: "*"
                 allowCredentials: true
+                exposed-headers:
+                  - Content-Disposition
 
 springdoc:
   swagger-ui:
